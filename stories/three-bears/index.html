@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<title>三びきのくま ―― ぷにぷにふれあい</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <section class="screen active" id="screen-game">
+    <header class="game-header">
+      <a class="back-link" href="../../index.html">← 家へ</a>
+      <h1>三びきのくま</h1>
+      <div class="header-spacer"></div>
+    </header>
+
+    <p class="subtitle">ほっぺ、ぷにぷにしてみよう。</p>
+
+    <div class="bear-tabs" id="bear-tabs">
+      <button class="bear-tab active" data-bear="big">
+        <span class="bear-tab-emoji big-size">🐻</span>
+        <span>おおきいくま</span>
+      </button>
+      <button class="bear-tab" data-bear="mama">
+        <span class="bear-tab-emoji mama-size">🐻</span>
+        <span>おかあさんくま</span>
+      </button>
+      <button class="bear-tab" data-bear="chibi">
+        <span class="bear-tab-emoji chibi-size">🐻</span>
+        <span>ちびくま</span>
+      </button>
+    </div>
+
+    <div class="parent-line" id="parent-line" hidden></div>
+
+    <div class="stage">
+      <div class="bear-figure" id="bear-figure">
+        <div class="bear-speech" id="bear-speech" hidden></div>
+        <div class="bear-body" id="bear-body">
+          <div class="bear-face" id="bear-face">🐻</div>
+          <button class="touch-spot spot-cheek" data-spot="cheek" aria-label="ほっぺ" style="--x:50%; --y:44%;"></button>
+          <button class="touch-spot spot-hand" data-spot="hand" aria-label="て" style="--x:22%; --y:66%;"></button>
+          <button class="touch-spot spot-foot" data-spot="foot" aria-label="あし" style="--x:66%; --y:86%;"></button>
+          <button class="touch-spot spot-tummy" data-spot="tummy" aria-label="おなか" style="--x:50%; --y:70%;"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mood-hint" id="mood-hint"></div>
+
+    <div class="ending-panel" id="ending-panel" hidden>
+      <p id="ending-message"></p>
+      <button id="ending-restart">また遊ぶ</button>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
