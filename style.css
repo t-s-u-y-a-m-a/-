@@ -92,6 +92,31 @@ button {
   animation: breathe 3.2s ease-in-out infinite;
 }
 
+.family-strip {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.family-photo {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 50%;
+  border: 2px solid var(--accent-glow);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  background: var(--bg-card);
+}
+
+.family-caption {
+  margin: -6px 0 4px;
+  font-size: 0.8rem;
+  color: var(--text-sub);
+  text-align: center;
+}
+
 .home-menu {
   width: 100%;
   display: flex;
@@ -226,6 +251,17 @@ button {
   font-size: 0.95rem;
   white-space: nowrap;
   animation: fadeUp 0.3s ease;
+}
+
+.parent-hold-photo {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 50%;
+  border: 2px solid var(--accent-glow);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.4);
+  animation: fadeUp 0.35s ease;
 }
 
 .baby-gesture {

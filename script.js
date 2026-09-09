@@ -35,20 +35,34 @@ const RECENT_FLAVOR = [
   "さっきからずっと同じ様子。",
 ];
 
-const CRY_LINES = ["ふぇ……", "ふぇ……ふぇ……", "うぇ……", "ん……ふぇ……", "ふぇー……"];
-const VOICE_LINES = ["あー", "うー", "んー", "あうー", "きゃっ", "あー！", "うー♪"];
-const EXPRESSIONS = ["😊", "😆", "🥺", "😣", "😴", "😮", "🙂"];
-const GESTURES = ["目をこする", "あくび", "手をパタパタ", "足をバタバタ", "顔をそむける", "指をしゃぶる", "パパ・ママを見る", "身体を少し動かす"];
+const CRY_LINES = [
+  "ふぇ……", "ふぇ……ふぇ……", "うぇ……", "ん……ふぇ……", "ふぇー……",
+  "えーん！えーん！", "うー……", "きゃー……（小さめ）", "ぐすん……", "むにゃ……（眠い）",
+  "うっ……（お寝坊？）", "ひくっ……（驚き）",
+];
+const VOICE_LINES = ["あー", "うー", "んー", "あうー", "きゃっ", "あー！", "うー♪", "へっ……", "あはっ♡"];
+const EXPRESSIONS = ["😊", "😆", "🥺", "😣", "😴", "😮", "🙂", "😲", "😟", "😢", "😑"];
+const GESTURES = [
+  "目をこする", "あくび", "手をパタパタ", "足をバタバタ", "顔をそむける",
+  "指をしゃぶる", "パパ・ママを見る", "身体を少し動かす",
+  "首をかしげる", "親を目で追う", "体をひねる", "笑いながら動く",
+];
 
 // カテゴリごとに「らしい」仕草を寄せておくと、観察と学びがつながりやすい
 const GESTURE_BY_CATEGORY = {
   sleepy: ["目をこする", "あくび", "身体を少し動かす"],
   hunger: ["指をしゃぶる", "手をパタパタ"],
-  hold: ["パパ・ママを見る", "手をパタパタ"],
-  diaper: ["足をバタバタ", "身体を少し動かす"],
-  temperature: ["身体を少し動かす", "顔をそむける"],
-  uncomfort: ["顔をそむける", "身体を少し動かす"],
+  hold: ["パパ・ママを見る", "親を目で追う", "手をパタパタ"],
+  diaper: ["足をバタバタ", "身体を少し動かす", "体をひねる"],
+  temperature: ["身体を少し動かす", "顔をそむける", "首をかしげる"],
+  uncomfort: ["顔をそむける", "身体を少し動かす", "体をひねる"],
 };
+
+// パパ・ママとの関係が良好なことを表す写真（抱っこで落ち着いたときに登場）
+const PARENT_PHOTOS = [
+  { src: "assets/images/papa-baby.png", alt: "パパに抱っこされて安心するてん" },
+  { src: "assets/images/mama-baby.png", alt: "ママに抱っこされて安心するてん" },
+];
 
 const CARE_ACTIONS = ["milk", "hold", "sleep", "diaper", "environment", "play"];
 
@@ -292,11 +306,13 @@ function playReactionSequence(reaction, result, onDone) {
   const speech = document.getElementById("baby-speech");
   const gestureEl = document.getElementById("baby-gesture");
   const resultBox = document.getElementById("result-message");
+  const parentPhoto = document.getElementById("parent-hold-photo");
 
   face.className = "baby-face";
   speech.hidden = true;
   gestureEl.hidden = true;
   resultBox.hidden = true;
+  parentPhoto.hidden = true;
 
   const steps = [];
 
@@ -309,6 +325,12 @@ function playReactionSequence(reaction, result, onDone) {
   steps.push(() => {
     gestureEl.hidden = false;
     gestureEl.textContent = "👶 " + reaction.gesture;
+    if (reaction.category === "hold" && result.tier !== "none") {
+      const photo = pickFrom(PARENT_PHOTOS);
+      parentPhoto.src = photo.src;
+      parentPhoto.alt = photo.alt;
+      parentPhoto.hidden = false;
+    }
   });
 
   steps.push(() => {
@@ -420,6 +442,7 @@ function renderBabyMemo() {
 
 function renderBaby() {
   const face = document.getElementById("baby-face");
+  document.getElementById("parent-hold-photo").hidden = true;
   const worst = dominantCategories(1)[0];
   face.className = "baby-face";
   if (worst.value > 70) {
