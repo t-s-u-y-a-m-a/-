@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<title>てんのお世話ゲーム</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 家画面 -->
+  <section id="screen-home" class="screen active">
+    <div class="home-card">
+      <h1 class="home-title">🏠 家</h1>
+
+      <div class="baby-home-preview">
+        <div class="baby-avatar" id="home-baby-face">👶</div>
+      </div>
+
+      <div class="family-strip">
+        <img src="assets/images/papa-baby.png" alt="パパとてん" class="family-photo" />
+        <img src="assets/images/mama-baby.png" alt="ママとてん" class="family-photo" />
+      </div>
+      <p class="family-caption">てんがいるだけで、毎日がもっと特別になる。</p>
+
+      <nav class="home-menu">
+        <button class="home-btn primary" data-goto="screen-care">
+          <span class="home-btn-icon">👶</span>
+          <span class="home-btn-label">てんのお世話</span>
+        </button>
+        <button class="home-btn" data-goto="screen-memo">
+          <span class="home-btn-icon">📒</span>
+          <span class="home-btn-label">赤ちゃんメモ</span>
+        </button>
+        <button class="home-btn locked" disabled>
+          <span class="home-btn-icon">📖</span>
+          <span class="home-btn-label">絵本</span>
+          <span class="coming-soon">COMING SOON</span>
+        </button>
+        <a class="home-btn" href="stories/three-bears/index.html">
+          <span class="home-btn-icon">🗺️</span>
+          <span class="home-btn-label">物語の世界</span>
+        </a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- てんのお世話画面 -->
+  <section id="screen-care" class="screen">
+    <header class="care-header">
+      <button class="back-btn" data-goto="screen-home">← 家へ</button>
+      <h2>てんのお世話</h2>
+      <div class="header-spacer"></div>
+    </header>
+
+    <div id="tutorial-banner" class="tutorial-banner" hidden></div>
+
+    <div class="baby-stage">
+      <div class="baby-room-glow"></div>
+      <div class="baby-figure" id="baby-figure">
+        <div class="baby-speech" id="baby-speech" hidden></div>
+        <img class="parent-hold-photo" id="parent-hold-photo" hidden alt="" />
+        <div class="baby-face" id="baby-face">😊</div>
+        <div class="baby-gesture" id="baby-gesture" hidden></div>
+      </div>
+    </div>
+
+    <div id="result-message" class="result-message" hidden></div>
+
+    <div class="care-actions">
+      <button class="observe-btn" id="btn-observe">🔎 てんを観察する</button>
+
+      <div class="care-grid">
+        <button class="care-btn" data-action="milk"><span class="care-icon">🍼</span><span>ミルク</span></button>
+        <button class="care-btn" data-action="hold"><span class="care-icon">🤗</span><span>抱っこ</span></button>
+        <button class="care-btn" data-action="sleep"><span class="care-icon">😴</span><span>寝かせる</span></button>
+        <button class="care-btn" data-action="diaper"><span class="care-icon">💩</span><span>おむつ</span></button>
+        <button class="care-btn" data-action="environment"><span class="care-icon">🌡️</span><span>環境を見る</span></button>
+        <button class="care-btn" data-action="play"><span class="care-icon">🎈</span><span>あやす</span></button>
+      </div>
+    </div>
+
+    <div id="observation-panel" class="observation-panel" hidden>
+      <button class="close-panel" id="close-observation">×</button>
+      <h3>🔎 観察結果</h3>
+      <div class="observation-body" id="observation-body"></div>
+    </div>
+
+    <div id="discovery-toast" class="discovery-toast" hidden></div>
+  </section>
+
+  <!-- 赤ちゃんメモ画面 -->
+  <section id="screen-memo" class="screen">
+    <header class="care-header">
+      <button class="back-btn" data-goto="screen-home">← 家へ</button>
+      <h2>赤ちゃんメモ</h2>
+      <div class="header-spacer"></div>
+    </header>
+    <div class="memo-list" id="memo-list"></div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
