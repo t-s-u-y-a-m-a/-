@@ -1,0 +1,277 @@
+:root {
+  color-scheme: dark;
+  --bg-black: #121014;
+  --bg-panel: #1c1a20;
+  --bg-card: #26222b;
+  --accent-warm: #ffb37b;
+  --accent-warm-soft: #ffd9b0;
+  --accent-glow: rgba(255, 179, 123, 0.25);
+  --text-main: #f5efe8;
+  --text-sub: #b9b2c0;
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg-black);
+  color: var(--text-main);
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Segoe UI", system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+button { font-family: inherit; cursor: pointer; border: none; outline: none; }
+
+[hidden] { display: none !important; }
+
+.screen {
+  width: 100%;
+  max-width: 480px;
+  min-height: 640px;
+  max-height: 92vh;
+  overflow-y: auto;
+  border-radius: var(--radius-lg);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.game-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.game-header h1 {
+  margin: 0;
+  font-size: 1.05rem;
+  flex: 1;
+  text-align: center;
+  color: var(--text-sub);
+}
+
+.header-spacer { width: 64px; }
+
+.back-link {
+  color: var(--text-sub);
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 999px;
+}
+.back-link:active { background: var(--bg-card); }
+
+.subtitle {
+  text-align: center;
+  color: var(--text-sub);
+  font-size: 0.85rem;
+  margin: 14px 0 0;
+}
+
+.bear-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 14px 18px 0;
+}
+
+.bear-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 4px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text-sub);
+  border: 1px solid var(--border-soft);
+  font-size: 0.7rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.bear-tab.active {
+  color: var(--accent-warm-soft);
+  background: linear-gradient(135deg, #3a2a22, #2a2229);
+  border-color: rgba(255,179,123,0.3);
+}
+
+.bear-tab-emoji { font-size: 1.4rem; }
+.bear-tab-emoji.big-size { font-size: 1.8rem; }
+.bear-tab-emoji.mama-size { font-size: 1.5rem; }
+.bear-tab-emoji.chibi-size { font-size: 1.1rem; }
+
+.parent-line {
+  margin: 12px 18px 0;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-sub);
+  font-size: 0.8rem;
+  text-align: center;
+  animation: fadeUp 0.3s ease;
+}
+
+.stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 260px;
+}
+
+.bear-figure {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bear-body {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bear-body.size-big { width: 260px; height: 260px; }
+.bear-body.size-mama { width: 220px; height: 220px; }
+.bear-body.size-chibi { width: 170px; height: 170px; }
+
+.bear-face {
+  font-size: 8rem;
+  animation: breathe 3.2s ease-in-out infinite;
+  transition: transform 0.15s ease;
+  user-select: none;
+}
+
+.bear-body.size-big .bear-face { font-size: 9rem; }
+.bear-body.size-mama .bear-face { font-size: 7.5rem; }
+.bear-body.size-chibi .bear-face { font-size: 5.5rem; }
+
+.bear-face.happy { animation: breathe 2.4s ease-in-out infinite; }
+.bear-face.neutral { animation: breathe 3.2s ease-in-out infinite; }
+.bear-face.fussy { animation: wobble 1.6s ease-in-out infinite; }
+.bear-face.crying { animation: shake 0.5s ease-in-out infinite; }
+
+.touch-spot {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translate(-50%, -50%);
+  width: 34%;
+  height: 34%;
+  border-radius: 50%;
+  background: transparent;
+  padding: 0;
+}
+
+.touch-spot:active { background: rgba(255,255,255,0.06); }
+
+.bear-speech {
+  position: absolute;
+  top: -6px;
+  transform: translateY(-100%);
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  padding: 8px 14px;
+  font-size: 1rem;
+  white-space: nowrap;
+  animation: fadeUp 0.25s ease;
+  pointer-events: none;
+}
+
+.mood-hint {
+  text-align: center;
+  min-height: 1.6em;
+  padding: 0 18px 6px;
+  font-size: 0.85rem;
+  color: var(--text-sub);
+}
+
+.ending-panel {
+  position: absolute;
+  inset: 0;
+  background: rgba(18,16,20,0.92);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 32px;
+  text-align: center;
+  animation: fadeUp 0.4s ease;
+}
+
+.ending-panel p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--accent-warm-soft);
+  white-space: pre-line;
+}
+
+.ending-panel button {
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #3a2a22, #2a2229);
+  color: var(--accent-warm-soft);
+  border: 1px solid rgba(255,179,123,0.3);
+  font-size: 0.95rem;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wobble {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-4deg); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-4px) rotate(-2deg); }
+  75% { transform: translateX(4px) rotate(2deg); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 420px) {
+  .bear-face { font-size: 6.5rem; }
+  .bear-body.size-big .bear-face { font-size: 7.2rem; }
+  .bear-body.size-chibi .bear-face { font-size: 4.5rem; }
+}
