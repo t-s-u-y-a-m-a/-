@@ -137,6 +137,8 @@ button {
   color: var(--text-main);
   font-size: 1.05rem;
   border: 1px solid var(--border-soft);
+  text-decoration: none;
+  box-sizing: border-box;
   transition: transform 0.15s ease, background 0.2s ease;
 }
 
